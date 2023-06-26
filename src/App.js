@@ -1,24 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import jwt_decode from "jwt-decode";
+import {useEffect} from "react"; 
 
 function App() {
+  // const [authToken, setAuthToken] = useState('');
+
+  useEffect(() => {
+    const currentURL = window.location.href;
+    const params = currentURL.split('#')[1];
+    const decodedToken = jwt_decode(params);
+
+    console.log(decodedToken);
+
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        Bonjour
+      </div>
   );
 }
 
