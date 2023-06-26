@@ -1,5 +1,6 @@
 {
   "name": "my-todo-app",
+  "proxy": "https://main.dy509vqd9o6ho.amplifyapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -39,19 +39,31 @@ function TodoList({ email }) {
       };
 
       try {
+        const url = 'https://frank-escargot-48.hasura.app/api/rest/putTodo/' + email + '/' + newTodo.text;
+
+
+        
+        const headers = {
+          'Content-Type': 'application/json',
+          'x-hasura-admin-secret': '7K53r5z1dEm26jYFzTtnqwoJrEUr4mRScaAKDD0kGCx3z8zIaC2dab5LFRoQVANO'
+        };
+
+        const data = {
+          "null":"null"
+        };
         console.log(email)
         console.log(newTodo.text)
-        const response = await axios.put(
-          'https://frank-escargot-48.hasura.app/api/rest/putTodo/' + email + '/' + newTodo.text, 
-          { headers: 
-            { 
-              "Content-Length":0,
-              "x-hasura-admin-secret": '7K53r5z1dEm26jYFzTtnqwoJrEUr4mRScaAKDD0kGCx3z8zIaC2dab5LFRoQVANO' ,
-              "Accept":"*/*",
-              "Connection":"keep-alive",
-            } 
-          }
-        );
+        // const response = await axios.put(url, data, headers);
+
+        const response = await axios({
+          method: "post",
+          url: `'https://frank-escargot-48.hasura.app/api/rest/putTodo/'${email}/${newTodo.text}`,
+          headers: {
+            "Content-Type": "application/json",
+            'x-hasura-admin-secret': '7K53r5z1dEm26jYFzTtnqwoJrEUr4mRScaAKDD0kGCx3z8zIaC2dab5LFRoQVANO'
+          },
+          data: {/* Your Data Goes Here */},
+        });
 
         if (response.data.insert_todos.affected_rows === 1) {
           setTodos([...todos, newTodo]);
@@ -65,6 +77,8 @@ function TodoList({ email }) {
 
   const handleDeleteTodo = async (id) => {
     try {
+
+
       const response = await axios.delete(
         'https://frank-escargot-48.hasura.app/api/rest/deleteTodo/' + id,
         {
