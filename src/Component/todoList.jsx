@@ -56,8 +56,8 @@ function TodoList({ email }) {
         // const response = await axios.put(url, data, headers);
 
         const response = await axios({
-          method: "post",
-          url: `'https://frank-escargot-48.hasura.app/api/rest/putTodo/'${email}/${newTodo.text}`,
+          method: "put",
+          url: `https://frank-escargot-48.hasura.app/api/rest/putTodo/${email}/${newTodo.text}`,
           headers: {
             "Content-Type": "application/json",
             'x-hasura-admin-secret': '7K53r5z1dEm26jYFzTtnqwoJrEUr4mRScaAKDD0kGCx3z8zIaC2dab5LFRoQVANO'
@@ -68,6 +68,7 @@ function TodoList({ email }) {
         if (response.data.insert_todos.affected_rows === 1) {
           setTodos([...todos, newTodo]);
           setInputValue('');
+          window.location.reload();
         }
       } catch (error) {
         console.error(error);
